@@ -1,14 +1,15 @@
-# Challenge
+## Hiring Challenge (Premier League)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
+This project was part of one of the hiring challenge I attended.
 
-## Development server
+## Problem Statement
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+The problem statement of the hiring challenge is as described 
+    1. With help of CSV files provided of the match held from 2008 - 2016 we need to build a premier league dashboard. 
+    2. The must have features of the league dashboard 
+        2.a. A Live Match score card. 
+        2.b. A way to see every match detail from 2008 till date with delievery details also. 
+    3.The technology used for building the Dashboard is Angular4, Typescript along with Bootstrap. 
 
 ## Build
 
@@ -23,6 +24,3 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
