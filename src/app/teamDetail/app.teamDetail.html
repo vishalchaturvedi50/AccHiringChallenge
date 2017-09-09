@@ -1,0 +1,152 @@
+<div class="row">
+    <div class=" col-md-12">
+        <div class="panel panel-default col-md-12">
+            <div class="col-md-4">
+                <div class="col-md-12 text-center">
+                    <img src="assets/{{teamName}}.png" class="logo-sm" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-12">
+                    <h3>{{teamName}}</h3>
+                </div>
+                <div class="col-md-4 text-center ">
+                    <div class="col-md-12 snap">
+                        <h3>{{filteredListForSeason.length}}</h3>
+                        <h3>Total Matches</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center ">
+                    <div class="col-md-12 snap">
+                        <h3>{{snapShot.totalWon}}</h3>
+                        <h3>Total Wins</h3>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="col-md-12 snap">
+                        <h3>{{snapShot.totalLoss}}</h3>
+                        <h3>Total Loss</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="panel panel-default">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Match With</th>
+                    <th>Match Date & City</th>
+                    <th>Match Winner</th>
+                    <th>Won By Runs</th>
+                    <th>Won By Wickets</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let match of filteredListForSeason;index as index">
+                    <th scope="row">{{index+1}}</th>
+                    <td>
+                        <span *ngIf="match.team1!=teamName">{{match.team1}}</span>
+                        <span *ngIf="match.team1==teamName">{{match.team2}}</span>
+                    </td>
+                    <td>
+                        {{match.date}} - {{match.city}}
+                    </td>
+                    <td>{{match.winner}}
+                        <span *ngIf="match.winner==teamName">
+                             <i class="fa fa-trophy icontrophy"></i></span></td>
+                    <td>{{match.win_by_runs}}</td>
+                    <td>{{match.win_by_wickets}}</td>
+                    <td>
+                        <button data-toggle="modal" data-target="#myModal" class="btn btn-success" (click)="getMatchDetailsFn(match)">View Details</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal for showing individuall details-->
+<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" *ngFor="let inn of inningData;index as index" [ngClass]="index==0?'active':''"><a href="#{{index}}" role="tab" data-toggle="tab">{{inn.name}}</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" *ngFor="let inn of inningData;index as index" [ngClass]="index==0?'active':''" id="{{index}}">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Batsman</th>
+                                    <th>Dismissal</th>
+                                    <th>Runs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let batsman of inn.batsmanList;index as index">
+                                    <th scope="row">{{index+1}}</th>
+                                    <td>
+                                        {{inn.batsmanList[index]}}
+                                    </td>
+                                    <td>
+                                        <span *ngIf="inn.dismissalstype[index]!=undefined">
+                                           {{inn.dismissalstype[index]}} by {{inn.dismissalsby[index]}}
+                                           </span>
+                                        <span *ngIf="inn.dismissalstype[index]==undefined">
+                                         Not out
+                                           </span>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.batsmanScore[index]}}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>
+                                        Extras
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.extras}}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.total}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

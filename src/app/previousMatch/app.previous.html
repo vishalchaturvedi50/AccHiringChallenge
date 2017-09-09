@@ -1,0 +1,49 @@
+<div class="row">
+    <div class=" col-md-12">
+        <div class="panel panel-default col-md-12">
+            <div class="col-md-4">
+                <div class="col-md-12 text-center">
+                    <img src="assets/{{seasonSnapShot.winner}}.png" class="logo-sm" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="col-md-12">
+                    <h3>{{seasonSnapShot.winner}} (vs) {{seasonSnapShot.loosingTeam}}</h3>
+                    <h4>{{seasonSnapShot.winner}} won by {{seasonSnapShot.win_by_runs}} runs and {{seasonSnapShot.win_by_wickets}}wickets.</h4>
+                </div>
+                <div class="col-md-12">
+                    <ul class="list-group">
+                        <li class="list-group-item row">
+                            <div class="col-md-1"><i *ngIf="seasonSnapShot.firstInningTeam==seasonSnapShot.winner" class="fa fa-trophy fa-2x icontrophy"></i></div>
+                            <div class="col-md-11">{{seasonSnapShot.firstInningTeam}} - {{seasonSnapShot.firstInningTeamScore}}/{{seasonSnapShot.firstInningDismmisals}}</div>
+                        </li>
+                        <li class="list-group-item row">
+                            <div class="col-md-1"><i *ngIf="seasonSnapShot.secondInningTeam==seasonSnapShot.winner" class="fa fa-trophy fa-2x icontrophy"></i></div>
+                            <div class="col-md-11">{{seasonSnapShot.secondInningTeam}} - {{seasonSnapShot.secondInningTeamScore}}/{{seasonSnapShot.secondInningDismmisals}}</div>
+                        </li>
+
+                    </ul>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--All the teams which played-->
+<div class="row">
+    <div class="col-md-4 pointer" *ngFor="let team of filteredAllTeams" routerLink="/teamDetail/{{year}}/{{team}}">
+        <div class="panel panel-default col-md-12">
+            <div class="panel-body row text-center">
+                <div class="col-md-12">
+                    <img src="assets/{{team}}.png" class="logo-lg" />
+                </div>
+                <div class="col-md-12">
+                    <h4>{{team}}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <!--<div class="panel-heading">
+            <h3> {{stats.batting_team}} VS {{stats.bowling_team}}</h3>
+        </div>-->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <img src="assets/{{stats.batting_team}}.png" class="logo-lg" />
+                    <h4>(BATTING)</h4>
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="assets/iplLogo.png" class="logo-lg" />
+                </div>
+                <div class="col-md-4 text-center">
+                    <img src="assets/{{stats.bowling_team}}.png" class="logo-lg" />
+                    <h4> (BOWLING)</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" *ngFor="let inn of inningData;index as index" [ngClass]="index==0?'active':''"><a href="#{{index}}" role="tab" data-toggle="tab">{{inn.name}}</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane" *ngFor="let inn of inningData;index as index" [ngClass]="index==0?'active':''" id="{{index}}">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Batsman</th>
+                                    <th>Dismissal</th>
+                                    <th>Runs</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let batsman of inn.batsmanList;index as index">
+                                    <th scope="row">{{index+1}}</th>
+                                    <td>
+                                        {{inn.batsmanList[index]}}
+                                    </td>
+                                    <td>
+                                        <span *ngIf="inn.dismissalstype[index]!=undefined">
+                                           {{inn.dismissalstype[index]}} by {{inn.dismissalsby[index]}}
+                                           </span>
+                                        <span *ngIf="inn.dismissalstype[index]==undefined">
+                                         Not out
+                                           </span>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.batsmanScore[index]}}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>
+                                        Extras
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.extras}}</b>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <b> {{inn.total}}</b>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
