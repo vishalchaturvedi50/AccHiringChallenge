@@ -22,7 +22,7 @@ export class CommonFunction {
 
     //Get matches details
     public getMatchesFn = function () {
-        this.httpService.httpGetFn("/assets/matches.csv").subscribe(response => {
+        this.httpService.httpGetFn("./assets/matches.csv").subscribe(response => {
             localStorage.matchDetails = JSON.stringify(this.csvJSONFn(response._body));
             this.getMatcheslsFn();
         }, err => {
@@ -40,7 +40,7 @@ export class CommonFunction {
 
     //Get Delieveries details of matches
     public getDelieveriesDetailFn = function () {
-        this.httpService.httpGetFn("/assets/deliveries.csv").subscribe(response => {
+        this.httpService.httpGetFn("./assets/deliveries.csv").subscribe(response => {
             this.delieverDetailsList = this.csvJSONFn(response._body);
             this.valueChangeSub.next([this.matchDetailsList, this.delieverDetailsList]);
         }, err => {

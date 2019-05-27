@@ -209,7 +209,7 @@ var CommonFunction = (function () {
         //Get matches details
         this.getMatchesFn = function () {
             var _this = this;
-            this.httpService.httpGetFn("/assets/matches.csv").subscribe(function (response) {
+            this.httpService.httpGetFn("./assets/matches.csv").subscribe(function (response) {
                 localStorage.matchDetails = JSON.stringify(_this.csvJSONFn(response._body));
                 _this.getMatcheslsFn();
             }, function (err) {
@@ -225,7 +225,7 @@ var CommonFunction = (function () {
         //Get Delieveries details of matches
         this.getDelieveriesDetailFn = function () {
             var _this = this;
-            this.httpService.httpGetFn("/assets/deliveries.csv").subscribe(function (response) {
+            this.httpService.httpGetFn("./assets/deliveries.csv").subscribe(function (response) {
                 _this.delieverDetailsList = _this.csvJSONFn(response._body);
                 _this.valueChangeSub.next([_this.matchDetailsList, _this.delieverDetailsList]);
             }, function (err) {
@@ -287,7 +287,7 @@ var MainComponent = (function () {
     function MainComponent(http, commonFn) {
         this.getMatchesFn = function () {
             var _this = this;
-            this.httpService.httpGetFn("/assets/matches.csv").subscribe(function (response) {
+            this.httpService.httpGetFn("./assets/matches.csv").subscribe(function (response) {
                 localStorage.matchDetails = JSON.stringify(_this.commonFn.csvJSONFn(response._body));
                 _this.getMatcheslsFn();
             }, function (err) {

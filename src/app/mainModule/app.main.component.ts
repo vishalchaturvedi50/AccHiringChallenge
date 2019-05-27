@@ -19,7 +19,7 @@ export class MainComponent {
     }
 
     public getMatchesFn = function () {
-        this.httpService.httpGetFn("/assets/matches.csv").subscribe(response => {
+        this.httpService.httpGetFn("./assets/matches.csv").subscribe(response => {
             localStorage.matchDetails =JSON.stringify(this.commonFn.csvJSONFn(response._body));
             this.getMatcheslsFn();
         }, err => {
