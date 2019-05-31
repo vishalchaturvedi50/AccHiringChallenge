@@ -2,14 +2,17 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "app/httpService/app.httpservice";
 import { Subject } from "rxjs/Subject";
+import { constVal } from "app/static/constants";
+import { DeliveriesClass } from "app/static/deliveries";
+import { MatchesClass } from "app/static/matches";
 
 
 @Injectable()
 export class CommonFunction {
 
-    public matchDetailsList: Array<any>[] = [];
-    public delieverDetailsList: Array<any>[] = [];
+    public matchDetailsList: Array<MatchesClass>[] = [];
 
+    public delieverDetailsList: Array<DeliveriesClass>[] = [];
 
     public valueChangeSub: Subject<any> = new Subject<any>();
 
@@ -22,25 +25,17 @@ export class CommonFunction {
 
     //Get matches details
     public getMatchesFn = function () {
-        this.httpService.httpGetFn("./assets/matches.csv").subscribe(response => {
-            localStorage.matchDetails = JSON.stringify(this.csvJSONFn(response._body));
-            this.getMatcheslsFn();
+        this.httpService.httpGetFn(constVal.matchCSV).subscribe(response => {
+            this.matchDetailsList = this.csvJSONFn(response._body);
+            this.getDelieveriesDetailFn();
         }, err => {
             console.log(err);
         })
     };
 
-    //Function to retrive matches data from localstorage
-    public getMatcheslsFn = function () {
-        this.matchDetailsList = JSON.parse(localStorage.matchDetails);
-        console.log(this.matchDetailsList);
-        this.getDelieveriesDetailFn();
-
-    };
-
     //Get Delieveries details of matches
     public getDelieveriesDetailFn = function () {
-        this.httpService.httpGetFn("./assets/deliveries.csv").subscribe(response => {
+        this.httpService.httpGetFn(constVal.deliveriesCSV).subscribe(response => {
             this.delieverDetailsList = this.csvJSONFn(response._body);
             this.valueChangeSub.next([this.matchDetailsList, this.delieverDetailsList]);
         }, err => {

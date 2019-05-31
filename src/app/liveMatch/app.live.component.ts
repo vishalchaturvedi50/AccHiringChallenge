@@ -8,15 +8,29 @@ import { HttpService } from "app/httpService/app.httpservice";
 })
 export class LiveMatchComponent {
 
+
     public matchDetailsList: any[] = [];
+
     public delieverDetailsList: any[] = [];
+
     public liveData: any[] = [];
-    public inningData:any=[];
+
+    public inningData: any = [];
+
     public liveInning: Number = 0;
+
     public stats: any = {};
-    public index: Number = 118;
-    constructor(public router: ActivatedRoute, public httpService: HttpService, public commonFn: CommonFunction) {
+
+    public index: number = 0;
+
+    public lastUpdated: any = "";
+
+    constructor(public router: ActivatedRoute,
+        public httpService: HttpService,
+        public commonFn: CommonFunction) {
+
         this.matchDetailsList = this.commonFn.matchDetailsList;
+
         this.delieverDetailsList = this.commonFn.delieverDetailsList;
 
         this.commonFn.valueChangeSub.subscribe(arrVal => {
@@ -26,32 +40,33 @@ export class LiveMatchComponent {
                 this.liveData.push(this.delieverDetailsList[i]);
             }
 
-            this.getLiveData();
+            this.getLiveDataFn();
         });
 
-        this.getLiveData();
+        this.getLiveDataFn();
     }
 
     /*TO build live feed - I am considering match 1 and from there on every 10 sec match will refresh
     if you want to reset the counter you can open the page in incognito
     */
-    public getLiveData = function () {
+    public getLiveDataFn() {
         if (this.delieverDetailsList.length > 0) {
 
 
             let item = this.delieverDetailsList[this.index];
             this.liveData.push(item);
-
+            this.lastUpdated = new Date();
 
             this.index++;
             this.statsOnLiveDataFn();
             setTimeout(() => {
-                this.getLiveData();
+                this.getLiveDataFn();
             }, 5000);
         }
     }
 
-    public statsOnLiveDataFn = function () {
+    /* Function to build stats on live data feed */
+    public statsOnLiveDataFn() {
         console.log(this.liveData);
 
         this.stats.batting_team = this.liveData[this.liveData.length - 1].batting_team;
@@ -113,6 +128,5 @@ export class LiveMatchComponent {
         this.inningData = innings;
 
     };
-
 
 }
